@@ -9,7 +9,19 @@ let apiQuotes = [];
 function newQuote() {
     // picking random number
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-    quoteAuthor.textContent = quote.author;
+    // check if author field is blank
+    if (!quote.author) {
+        quoteAuthor.textContent = 'Unknown';
+    } else {
+        quoteAuthor.textContent = quote.author;
+    }
+
+    if (quote.text.length > 50) {
+        quoteText.classList.add('long-quote');
+    } else {
+        quoteText.classList.remove('long-quote');
+    }
+
     quoteText.textContent = quote.text;
 }
 // Get quotes from API 
