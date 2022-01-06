@@ -1,9 +1,8 @@
 const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
 const quoteAuthor = document.getElementById('author');
-const twitterBtn = document.getElementById('twitter-button');
+const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote-button');
-
 let apiQuotes = [];
 
 function newQuote() {
@@ -24,6 +23,7 @@ function newQuote() {
 
     quoteText.textContent = quote.text;
 }
+
 // Get quotes from API 
 async function getQuotes() {
     const apiURL = 'https://type.fit/api/quotes'
@@ -35,6 +35,16 @@ async function getQuotes() {
         console.error('no quotes available')
     }
 }
+
+// tweet quote 
+function tweetQuote() {
+    const twitterURL = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${quoteAuthor.textContent}`;
+    window.open(twitterURL, '_blank');
+}
+
+// EVENT LISTENERS
+newQuoteBtn.addEventListener('click', newQuote);
+twitterBtn.addEventListener('click', tweetQuote);
 
 // on load get quotes
 getQuotes();
